@@ -2,44 +2,38 @@
 using System.Reflection;
 using System.Runtime.Versioning;
 
-class Program
+namespace GetTargetFrameworkVersionForFW
 {
-    static void Main(string[] args)
+    class Program
     {
-        if (args.Length == 0)
+        static void Main(string[] args)
         {
-            Console.WriteLine("DLLのパスを指定してください。");
-            return;
-        }
-
-        string dllPath = args[0];
-
-        try
-        {
-            Assembly assembly = Assembly.LoadFrom(dllPath);
-            var targetFrameworkAttribute = assembly.GetCustomAttribute<TargetFrameworkAttribute>();
-
-            if (targetFrameworkAttribute != null)
+            if (args.Length == 0)
             {
-                // .NET Frameworkと.NET Core/.NET 5+で条件分岐
-#if NETFRAMEWORK
-                Console.WriteLine("これは .NET Framework で実行されています。");
-#elif NETCOREAPP || NET
-                Console.WriteLine("これは .NET Core または .NET 5+ で実行されています。");
-#else
-                Console.WriteLine("不明なターゲットフレームワークです。");
-#endif
+                Console.WriteLine("DLLのパスを指定してください。");
+                return;
+            }
 
-                Console.WriteLine($"ターゲットフレームワーク\t{targetFrameworkAttribute.FrameworkName}");
-            }
-            else
+            string dllPath = args[0];
+
+            try
             {
-                Console.WriteLine("ターゲットフレームワーク情報が見つかりませんでした。");
+                Assembly assembly = Assembly.LoadFrom(dllPath);
+                var targetFrameworkAttribute = assembly.GetCustomAttribute<TargetFrameworkAttribute>();
+
+                if (targetFrameworkAttribute != null)
+                {
+                    Console.WriteLine($"ターゲットフレームワーク\t{targetFrameworkAttribute.FrameworkName}");
+                }
+                else
+                {
+                    Console.WriteLine("ターゲットフレームワーク情報が見つかりませんでした。");
+                }
             }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"エラーが発生しました: {ex.Message}");
+            catch (Exception ex)
+            {
+                Console.WriteLine($"エラーが発生しました: {ex.Message}");
+            }
         }
     }
 }
