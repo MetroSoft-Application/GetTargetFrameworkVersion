@@ -23,6 +23,15 @@ namespace GetTargetFrameworkVersionForFW
 
                 if (targetFrameworkAttribute != null)
                 {
+                    // .NET Frameworkと.NET Core/.NET 5+で条件分岐
+#if NETFRAMEWORK
+                Console.WriteLine("これは .NET Framework で実行されています。");
+#elif NETCOREAPP || NET
+                    Console.WriteLine("これは .NET Core または .NET 5+ で実行されています。");
+#else
+                Console.WriteLine("不明なターゲットフレームワークです。");
+#endif
+
                     Console.WriteLine($"ターゲットフレームワーク\t{targetFrameworkAttribute.FrameworkName}");
                 }
                 else

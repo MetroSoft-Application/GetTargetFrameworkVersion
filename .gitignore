@@ -1,4 +1,4 @@
-﻿################################################################################
+################################################################################
 # この .gitignore ファイルは Microsoft(R) Visual Studio によって自動的に作成されました。
 ################################################################################
 
@@ -6,4 +6,3 @@
 /GetTargetFrameworkVersionForFW/.vs/GetTargetFrameworkVersionForFW
 /GetTargetFrameworkVersionForFW/bin/Debug
 /GetTargetFrameworkVersionForFW/obj/Debug
-/GetTargetFrameworkVersionForFW/Properties
